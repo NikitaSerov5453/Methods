@@ -26,28 +26,21 @@ public class Lesson4 {
 
     public static void main(String[] args) {
         generateTriangle(triangleArray);
-        printTriangle(triangleArray);
         generateTriangleMatrix(triangleMatrix);
         fieldTriangleMatrix(triangleMatrix);
 //        go();
 //        printTriangle(triangleMatrix);
         generateTriangleMatrix(triangleSupportMatrix);
-        printTriangle(triangleArrayHelp);
-        compression(triangleArrayHelp);
-        printTriangle(triangleArrayHelp);
+        printTriangle(triangleArray);
+        compression(triangleArray);
+        printTriangle(triangleArray);
+        System.out.println(maxValueInArray(triangleArray[lengthArray - 1]));
 
     }
-
-    public static final int[] row = new int[]{0, 1};
-    public static final int[] cel = new int[]{1, 1};
-    public static int x = 0;
-    public static int y = 0;
-    public static int minLengthTriangle = 2;
-    public static int maxLengthTriangle = 10;
     public static int minNumberInTriangle = 0;
     public static int maxNumberInTriangle = 100;
 
-    public static int lengthArray = 5;
+    public static int lengthArray = 10;
 
     public static int[][] triangleArray = new int[lengthArray][];
     public static int[][] triangleArrayHelp = new int[][]{{60},{80, 28},{16, 94, 42},{15, 45, 2, 33},{98, 7, 93, 3, 79}};
@@ -56,9 +49,6 @@ public class Lesson4 {
     public static int[] wayArray = new int[lengthArray];
     public static int[] holdWayArray = new int[lengthArray];
 
-    public static boolean isValid(int x, int y, int[] array) {
-        return x > 0 && y > 0 && x < lengthArray && y < array.length;
-    }
 
     public static void generateTriangle(int[][] triangleArray) {
         for (int i = 0; i < triangleArray.length; i++) {
@@ -99,77 +89,16 @@ public class Lesson4 {
         return ThreadLocalRandom.current().nextInt(minValue, maxValue);
     }
 
-    public static void go() {
-        int holdCounter = 0;
-        int counter = 0;
-        for (int i = 0; i < triangleMatrix.length; i++) {
-            for (int j = 0; j < triangleMatrix[i].length; j++) {
-                if (triangleMatrix[i][j] == minValueInArray(triangleMatrix[i]) && triangleMatrix[i][j] != 0) {
-                    counter += triangleArray[i][j];
-                    holdWayArray[i] = triangleArray[i][j];
+    public static int maxValueInArray(int[] array) {
 
-                }
-            }
-        }
-
-        if (counter > holdCounter) {
-            holdCounter = counter;
-            wayArray = holdWayArray;
-        }
-        System.out.println(holdCounter);
-        System.out.println(Arrays.toString(wayArray));
-        counter = 0;
-        minusArray(triangleMatrix);
-        if (triangleMatrix[0][0] == 0) {
-            return;
-        }
-
-        go();
-    }
-
-    public static int minValueInArray(int[] array) {
-        int minValue = Integer.MAX_VALUE;
+        int maxValue = Integer.MIN_VALUE;
         for (int j : array) {
-            if (j < minValue && j != 0) {
-                minValue = j;
+            if (j > maxValue && j != 0) {
+                maxValue = j;
             }
         }
-        return minValue;
+        return maxValue;
     }
-
-//    public static void counterMaxNumber(int[][] array) {
-//        int counter = 0;
-//        int finalSum = 0;
-//        for (int i = 0; i < array.length; i++) {
-//            for (int j = 0; j < i + 1; j++) {
-//
-//            }
-//        }
-//    }
-
-//    public static void stepDefinition(int[][] triangleMatrix) {
-//
-//        int holdX = 0;
-//        int holdY = 0;
-//
-//        for (int i = 0; i < 2; i++) {
-//            int newX = x++;
-//            int newY = y + row[i];
-//            if (isValid(x, y)) {
-//                if (triangleMatrix[newX][newY] < triangleMatrix[holdX][holdY] && triangleMatrix[newX][newY] != 0) {
-//                    holdY = newY;
-//                    holdX = newX;
-//                }
-//            }
-//        }
-//        x = holdX;
-//        y = holdY;
-//        triangleMatrix[x][y] = triangleMatrix[x][y] - 1;
-//        if (triangleMatrix[0][0] == 0) {
-//            return;
-//        }
-//        stepDefinition(triangleMatrix);
-//    }
 
 
     public static int pow(int value, int powValue) {
@@ -198,31 +127,6 @@ public class Lesson4 {
         }
     }
 
-    public static void fieldTriangleSupportMatrix(int[][] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                array[i][j]++;
-                if (i < array.length - 1) {
-                    array[i + 1][j]++;
-                    array[i + 1][j + 1]++;
-                }
-            }
-        }
-    }
-
-    public static void minusArray(int[][] array) {
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length; j++) {
-                if (array[i][j] > 0) {
-                    array[i][j]--;
-                }
-            }
-        }
-    }
-
-
-    public static ArrayList<Integer> array1 = new ArrayList<>();
-
     public static void compression(int[][] array) {
         int hold = 0;
         int a = 0;
@@ -246,18 +150,13 @@ public class Lesson4 {
                     array[i][j] = hold + array[i][j];
 
                 }
-
             }
         }
     }
-//    public static void x(int[][] array) {
-//        for (int i = 0; i < array.length; i++) {
-//            for (int j = 0; j < array[i].length; j++) {
-//                array[i][j] = pow(2, array.length - (i + 1));
-//                if (j != 0 && j != array[i].length - 1) {
-//                    array[i][j]++;
-//                }
-//            }
-//        }
-//    }
+
+    public static void getWay(int[][] array) {
+        int maxValue = maxValueInArray(array[lengthArray - 1]);
+
+    }
+
 }
