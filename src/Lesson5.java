@@ -36,11 +36,15 @@ public class Lesson5 {
         Lesson5 lesson5 = new Lesson5();
         lesson5.createDragon();
         lesson5.createSpearman();
+        minValueSpearman(lesson5.getDragonDamage(), lesson5.getDragonHP(), lesson5.getSpearmanDamage(), lesson5.getSpearmanHP());
     }
     private int dragonHP;
     private int dragonDamage;
     private int spearmanHP;
     private int spearmanDamage;
+
+    public static int numberSpearman = 1;
+    public static int strokeCounter = 1;
 
     public void setDragonHP(int dragonHP) {
         this.dragonHP = dragonHP;
@@ -87,15 +91,33 @@ public class Lesson5 {
         System.out.println("Введите урон копейщика:");
         setSpearmanDamage(scanner.nextInt());
     }
-
-    public static void minValueSpearman() {
-        int numberSpearman = 1;
+    public static void minValueSpearman(int dragonDamage, int dragonHP, int spearmanDamage, int spearmanHP) {
+        double HP = spearmanHP * numberSpearman;
+        int dragon = dragonHP;
         while (true) {
-            
+            int damage = spearmanDamage * ((int) Math.ceil(HP / spearmanHP));
+            if (!(strokeCounter % 2 == 0)) {
+                if (HP > 0) {
+                    dragon -= damage;
+                    strokeCounter++;
+                }
+            } else {
+                if (HP > 0 && dragon > 0) {
+                    HP -= dragonDamage;
+                    strokeCounter++;
+                }
+            }
+            if (HP <= 0) {
+                break;
+            }
+            if (dragon <= 0) {
+                System.out.println("минимальное количество копейщиков: " + numberSpearman);
+                return;
+            }
         }
+        numberSpearman++;
+        strokeCounter = 1;
+        minValueSpearman(dragonDamage, dragonHP, spearmanDamage, spearmanHP);
     }
-
-
-
     public static Scanner scanner = new Scanner(System.in);
 }
